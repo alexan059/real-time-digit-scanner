@@ -5,3 +5,10 @@
  * @param cb Callback
  */
 export const ready = cb => document.addEventListener('DOMContentLoaded', cb);
+
+/**
+ * jQuery style query selector
+ *
+ * @param el Element ID or class
+ */
+export const $ = el => document.querySelector(el);

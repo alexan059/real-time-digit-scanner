@@ -1,28 +1,65 @@
 // Source: https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 
-if (hasGetUserMedia()) {
-    ready(function () {
+import { $ } from '@/utils';
 
-        console.log('Your document is ready!');
+class Camera {
 
-        const constraints = {
-            video: true
-        };
+    /**
+     * Video Element
+     *
+     * @type {null|HTMLVideoElement}
+     * @private
+     */
+    _el = null;
 
-        const video = document.querySelector('video');
+    _constraints = {
+        video: true
+    };
 
-        navigator.mediaDevices.getUserMedia(constraints)
+    constructor(el, constraints = {}) {
+        this._el = $(el);
+        this._constraints = Object.assign({}, this._constraints, constraints);
+
+        if (this._el === null) {
+            alert('Couldn\'t find video object.');
+            return;
+        }
+
+        if (!Camera.hasGetUserMedia()) {
+            alert('getUserMedia() is not supported by your browser.');
+        }
+    }
+
+    getVideoSource() {
+        return this._el;
+    }
+
+    getDimenstions() {
+        return new Promise(resolve => {
+            this._el.addEventListener('loadedmetadata', () => {
+                const ratio = this._el.videoWidth / this._el.videoHeight;
+                const width = this._el.videoWidth - 100;
+                const height = parseInt(width / ratio, 10);
+
+                resolve({ width, height });
+            }, false);
+        });
+    }
+
+    stream() {
+        navigator.mediaDevices.getUserMedia(this._constraints)
             .then((stream) => {
-                video.srcObject = stream;
+                this._el.srcObject = stream;
             })
             .catch((error) => {
-                console.log(error.name, error.message);
+                alert(`${ error.name }: ${ error.message }`);
             });
-    })
-} else {
-    alert('getUserMedia() is not supported by your browser')
+    }
+
+    static hasGetUserMedia() {
+        return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    }
+
 }
 
-function hasGetUserMedia() {
-    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-}
+export default Camera;
