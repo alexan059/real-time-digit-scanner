@@ -16,8 +16,8 @@ class Camera {
         video: {
             facingMode: 'environment',
             // facingMode: 'user',
-            width: { min: 400, ideal: 400, max: 400 },
-            height: { min: 400, ideal: 400, max: 400 }
+            width: { min: 240, ideal: 300, max: 400 },
+            height: { min: 320, ideal: 300, max: 400 }
         }
     };
 

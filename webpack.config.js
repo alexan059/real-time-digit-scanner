@@ -27,7 +27,7 @@ const webpackPlugins = (() => {
         }),
         new OptimizeCssAssetsPlugin(),
         new CopyPlugin([
-            { from: 'src/tensorflow/models', to: 'models' }
+            { from: 'src/tensorflow/models', to: 'tensorflow/models' }
         ]),
         new CleanWebpackPlugin()
     ];

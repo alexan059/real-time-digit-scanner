@@ -1,10 +1,11 @@
-import { ready } from '@/utils';
+import { $, ready } from '@/utils';
 import Camera from '@/camera';
 import Capture from '@/capture';
 import ImageProcessor from '@/image-processor';
 
 // Import styles
 import '@/assets/main.scss';
+import Scanner from '@/tensorflow/scanner';
 
 ready(async () => {
 
@@ -24,8 +25,14 @@ ready(async () => {
 
         capture.start();
 
-        // ImageProcessor.getBytesArray(canvas);
+        const scanner = await Scanner.initScanner();
+        const number = $('#number');
 
+        setInterval(async () => {
+            const image = await capture.getImage();
+
+            number.innerText = scanner.analyze(image);
+        }, 1000);
     }
 
 });

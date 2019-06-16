@@ -1,17 +1,7 @@
 class ImageProcessor {
 
-    /**
-     * @param canvas {HTMLCanvasElement}
-     */
-    static getBytesArray(canvas) {
-        const context = canvas.getContext('2d');
-        const data = context.getImageData(0, 0, canvas.width, canvas.height);
-
-        console.log(data);
-    }
-
     static greyscale(context, width, height) {
-        let imageData = context.getImageData(0, 0, width, height);
+        const imageData = context.getImageData(0, 0, width, height);
         const pixels = imageData.data;
 
         for (let i = 0; i < pixels.length; i += 4) {
@@ -30,7 +20,7 @@ class ImageProcessor {
     }
 
     static brightness = (value) => (context, width, height) => {
-        let imageData = context.getImageData(0, 0, width, height);
+        const imageData = context.getImageData(0, 0, width, height);
         const pixels = imageData.data;
 
         const adjust = (value >= 0)
@@ -47,7 +37,7 @@ class ImageProcessor {
     };
 
     static invert(context, width, height) {
-        let imageData = context.getImageData(0, 0, width, height);
+        const imageData = context.getImageData(0, 0, width, height);
         const pixels = imageData.data;
 
         for (let i = 0; i < pixels.length; i += 4) {

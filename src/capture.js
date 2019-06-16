@@ -64,16 +64,19 @@ class Capture {
 
     draw() {
         this._context.drawImage(this._src, 0, 0, this._width, this._height);
-
         this.useModifiers();
-
-        // const data = this._context.getImageData(0, 0, this._width, this._height);
-
-        // console.log(data);
     }
 
-    getCanvas() {
-        return this._canvas;
+    getImage() {
+        return new Promise(resolve => {
+            const image = new Image();
+
+            image.src = this._canvas.toDataURL();
+
+            image.onload = () => {
+                resolve(image);
+            };
+        });
     }
 }
 
