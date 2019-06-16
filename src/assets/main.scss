@@ -1,12 +1,44 @@
-video {
-  display: none;
+$silver: #c0c0c0;
+
+$break: 789px;
+
+html, body {
+  height: 100%;
 }
 
-canvas {
-  //position: absolute;
-  //top: 0;
-  //left: 0;
-  //width: 100%;
-  //height: 100%;
-  //background: blue;
+body {
+  background-color: #8854d0;
+  color: #2bcbba;
+}
+
+main {
+  position: relative;
+  background-color: #a55eea;
+
+  max-width: 640px;
+  max-height: 1138px;
+
+  height: 100%;
+
+  /* On mobile */
+  @media screen and (max-width: $break) {
+    max-width: none;
+    max-height: none;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    overflow: hidden;
+  }
+
+  section#screenshot {
+    border: 8px solid #2bcbba;
+  }
+}
+
+video {
+  display: none;
 }

@@ -13,7 +13,12 @@ class Camera {
     _el = null;
 
     _constraints = {
-        video: true
+        video: {
+            facingMode: 'environment',
+            // facingMode: 'user',
+            width: { min: 400, ideal: 400, max: 400 },
+            height: { min: 400, ideal: 400, max: 400 }
+        }
     };
 
     constructor(el, constraints = {}) {
@@ -21,7 +26,7 @@ class Camera {
         this._constraints = Object.assign({}, this._constraints, constraints);
 
         if (this._el === null) {
-            alert('Couldn\'t find video object.');
+            alert('Couldn\'t find video element.');
             return;
         }
 
@@ -34,7 +39,7 @@ class Camera {
         return this._el;
     }
 
-    getDimenstions() {
+    getDimensions() {
         return new Promise(resolve => {
             this._el.addEventListener('loadedmetadata', () => {
                 const ratio = this._el.videoWidth / this._el.videoHeight;

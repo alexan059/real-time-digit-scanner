@@ -3,6 +3,7 @@ const { HotModuleReplacementPlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -23,8 +24,10 @@ const webpackPlugins = (() => {
         new MiniCssExtractPlugin({
             filename: '[name].[hash].css'
         }),
-        new OptimizeCssAssetsPlugin()
-
+        new OptimizeCssAssetsPlugin(),
+        new CopyPlugin([
+            {from: 'src/tensorflow/models', to: 'docs/models'}
+        ])
     ];
 
     return isDevelopment ? base.concat(development) : base.concat(production);
@@ -41,10 +44,11 @@ module.exports = {
         hot: true,
         progress: true,
         port: 9000,
-        open: true,
         inline: true,
         contentBase: './src',
-        historyApiFallback: true
+        historyApiFallback: true,
+        host: '0.0.0.0',
+        https: true
     },
     module: {
         rules: [

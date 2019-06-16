@@ -1,9 +1,10 @@
 import { ready } from '@/utils';
+import Camera from '@/camera';
+import Capture from '@/capture';
+import ImageProcessor from '@/image-processor';
 
 // Import styles
-import '@/assets/main.scss'
-import Camera from '@/camera';
-import Screenshot from '@/screenshot';
+import '@/assets/main.scss';
 
 ready(async () => {
 
@@ -11,11 +12,19 @@ ready(async () => {
 
     if (Camera.hasGetUserMedia()) {
         camera.stream();
-        const {width, height} = await camera.getDimenstions();
+
+        const { width, height } = await camera.getDimensions();
         const video = camera.getVideoSource();
 
-        const screenshot = new Screenshot(video, 'canvas', width, height);
+        const capture = new Capture(video, 'canvas', width, height);
 
+        capture.addModifier(ImageProcessor.greyscale);
+        capture.addModifier(ImageProcessor.brightness(100));
+        capture.addModifier(ImageProcessor.invert);
+
+        capture.start();
+
+        // ImageProcessor.getBytesArray(canvas);
 
     }
 
