@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>TensorFlow Digit Analyzer</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="main.6819fe182ab605b7fd3f.css" rel="stylesheet"></head>
+<link href="main.6818487087da9d19ba5a.css" rel="stylesheet"></head>
 <body>
 
-<div class="container-fluid">
-    <div class="row">
-        <h3>Digit Scanner</h3>
-    </div>
-    <div class="row">
-        <div class="col-xs">
+<main class="container-fluid text-center">
+    <header class="row mb-4">
+        <div class="col-sm">
+            <h1 class="mt-4">Digit Scanner</h1>
+        </div>
+    </header>
+    <section id="video" class="row invisible">
+        <div class="col-sm">
             <video autoplay></video>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs">
+    </section>
+    <section id="screenshot" class="row">
+        <div class="col-sm">
             <canvas></canvas>
         </div>
-    </div>
-</div>
+    </section>
+    <footer id="result" class="row mt-4">
+        <div class="col-sm">
+            <h2>Number</h2>
+            <h3 id="number">X</h3>
+        </div>
+    </footer>
+</main>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -26,8 +27,9 @@ const webpackPlugins = (() => {
         }),
         new OptimizeCssAssetsPlugin(),
         new CopyPlugin([
-            {from: 'src/tensorflow/models', to: 'docs/models'}
-        ])
+            { from: 'src/tensorflow/models', to: 'models' }
+        ]),
+        new CleanWebpackPlugin()
     ];
 
     return isDevelopment ? base.concat(development) : base.concat(production);
